@@ -37,16 +37,17 @@ class RecipesController < ApplicationController
   end
 
   def destroy
-    recipe = current_user.recipes.find(params[:id])
-
-    if recipe.nil?
+    begin
+      recipe = current_user.recipes.find(params[:id])
+    rescue
+      @recipe = Recipe.find(params[:id])
       flash.now[:alert] = t('.error')
-      return render :show
+      return render :show, status: :unprocessable_entity
+    else
+      recipe.destroy
+      flash[:notice] = t('.success')
+      redirect_to root_path, status: :see_other
     end
-
-    recipe.destroy
-    flash[:notice] = t('.success')
-    redirect_to root_path, status: :see_other
   end
 
   private
