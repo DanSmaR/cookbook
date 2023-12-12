@@ -8,9 +8,9 @@ feature 'Usuário remove receita' do
     recipe = create(:recipe, user: user, recipe_type: recipe_type)
 
     login_as user, scope: :user
-    visit edit_recipe_path(recipe)
+    visit recipe_path(recipe)
 
-    expect(page).to have_link 'Remover'
+    expect(page).to have_button 'Remover'
   end
 
   scenario 'não tem autorização para remover receitas de outros usuários' do

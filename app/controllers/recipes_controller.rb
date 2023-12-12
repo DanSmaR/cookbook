@@ -36,6 +36,19 @@ class RecipesController < ApplicationController
     render :edit
   end
 
+  def destroy
+    recipe = current_user.recipes.find(params[:id])
+
+    if recipe.nil?
+      flash.now[:alert] = t('.error')
+      return render :show
+    end
+
+    recipe.destroy
+    flash[:notice] = t('.success')
+    redirect_to root_path, status: :see_other
+  end
+
   private
 
   def recipe_params
