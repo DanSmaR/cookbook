@@ -11,6 +11,12 @@ feature 'Usuário remove receita' do
     visit recipe_path(recipe)
 
     expect(page).to have_button 'Remover'
+
+    click_on 'Remover'
+
+    expect(page).to have_content 'Receita removida com sucesso'
+    expect(current_path).to eq root_path
+    expect(Recipe.any?).to be_falsey
   end
 
   scenario 'não tem autorização para remover receitas de outros usuários' do
