@@ -13,7 +13,7 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
     unless @recipe.user == current_user
       flash[:alert] = t('.error')
-      return redirect_to recipe_path(@recipe)
+      redirect_to recipe_path(@recipe)
     end
   end
 
