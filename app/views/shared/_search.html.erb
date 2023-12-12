@@ -1,0 +1,11 @@
+  <%= form_with url: search_recipes_path, class: "row g-3 align-items-center", method: :get do |form| %>
+    <div class="col-auto">
+      <%= form.label :name, "Busca Receitas:", class: "col-form-label", for: "searchInput" %>
+    </div>
+    <div class="col-auto">
+      <%= form.search_field :name, placeholder: 'Nome da Receita', class: "form-control", id: "searchInput" %>
+    </div>
+    <div class="col-auto">
+        <%= form.submit "Buscar", class:'btn btn-primary' %>
+    </div>
+  <% end %>

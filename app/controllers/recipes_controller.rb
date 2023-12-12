@@ -50,6 +50,10 @@ class RecipesController < ApplicationController
     end
   end
 
+  def search
+
+  end
+
   private
 
   def recipe_params
