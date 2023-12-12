@@ -22,6 +22,19 @@ feature 'Busca de receitas' do
     fill_in 'Busca Receitas', with: 'Manjar'
     click_on 'Buscar'
 
-    expect(page).to have_content 'Receitas Encontradas'
+    expect(current_path).to eq search_recipes_path
+    expect(page).to have_content '1 receita encontrada'
+    expect(page).to have_content('Manjar')
+    expect(page).to have_content('Sobremesa')
+    expect(page).to have_content('30 minutos')
+  end
+
+  scenario 'sem termo de busca, mostra erro' do
+    visit root_path
+    fill_in 'Busca Receitas', with: ''
+    click_on 'Buscar'
+
+    expect(page).to have_content 'Termo para pesquisa está vazio'
+    expect(current_path).to eq root_path
   end
 end

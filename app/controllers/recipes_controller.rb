@@ -51,7 +51,9 @@ class RecipesController < ApplicationController
   end
 
   def search
-
+    @name = params[:name]
+    return redirect_back(fallback_location: root_path, alert: 'Termo para pesquisa está vazio') if @name.blank?
+    @recipes = Recipe.search(@name)
   end
 
   private
