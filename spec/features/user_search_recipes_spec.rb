@@ -27,6 +27,19 @@ feature 'Busca de receitas' do
     expect(page).to have_content('Manjar')
     expect(page).to have_content('Sobremesa')
     expect(page).to have_content('30 minutos')
+
+    fill_in 'Busca Receitas', with: 'm'
+    click_on 'Buscar'
+    expect(page).to have_content '2 receitas encontradas'
+
+    expect(page).to have_content('Manjar')
+    expect(page).to have_content('Sobremesa')
+    expect(page).to have_content('30 minutos')
+
+    expect(page).to have_content('Hamburguer')
+    expect(page).to have_content('Lanche')
+    expect(page).to have_content('30 minutos')
+
   end
 
   scenario 'sem termo de busca, mostra erro' do
