@@ -11,6 +11,10 @@ class RecipesController < ApplicationController
 
   def edit
     @recipe = Recipe.find(params[:id])
+    unless @recipe.user == current_user
+      flash[:alert] = t('.error')
+      return redirect_to recipe_path(@recipe)
+    end
   end
 
   def create
@@ -18,7 +22,7 @@ class RecipesController < ApplicationController
 
     if @recipe.save
       flash[:notice] = t('.success')
-      return redirect_to(@recipe) 
+      return redirect_to(@recipe)
     end
     flash.now[:alert] = t('.error')
     render :new

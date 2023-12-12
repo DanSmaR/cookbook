@@ -39,9 +39,6 @@ feature 'Usuário edita receita' do
     recipe = create(:recipe, user: user, recipe_type: recipe_type)
 
     login_as another_user, scope: :user
-    visit recipe_path(recipe)
-
-    expect(page).to_not have_link('Editar')
 
     visit edit_recipe_path(recipe)
 

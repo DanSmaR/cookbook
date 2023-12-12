@@ -17,3 +17,5 @@ pt-BR:
     create:
       success:  'Receita cadastrada com sucesso'
       error:  'Não foi possível cadastrar receita'
+    edit:
+      error: 'Não possui autorização para editar essa receita'
