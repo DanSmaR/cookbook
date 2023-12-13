@@ -1,5 +1,6 @@
 class ListsController < ApplicationController
-  def add_to_list
-
+  def lists
+    @recipe = params[:recipe_id]
+    @lists = current_user.lists.all
   end
 end

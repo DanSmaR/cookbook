@@ -3,7 +3,7 @@
     <h3 class="mt-2">
       <%= @recipe.title %>
       <%= link_to 'Editar', edit_recipe_path(@recipe), class: 'btn btn-primary' %>
-      <%= link_to 'Adicionar à Lista', add_to_list_recipe_list_path(@recipe) %>
+      <%= link_to 'Adicionar à Lista', lists_recipe_lists(@recipe) %>
     </h3>
   </div>
   <div class="card-body">

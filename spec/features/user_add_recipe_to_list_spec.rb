@@ -20,5 +20,7 @@ feature 'Usuario adiciona receita em lista' do
     expect(page).to have_link('Adicionar à Lista')
     click_on 'Adicionar à Lista'
     expect(page).to have_content('Adicionar Receita à Lista')
+    expect(page).to have_content('Criar Lista')
+    expect(page).to have_field('Nome da Lista')
   end
 end

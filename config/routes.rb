@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   resources :recipe_types, only: %i[new create index show]
   resources :recipes, only: %i[new create edit update show] do
     resources :lists, only: %i[] do
-      member do
-        get 'add_to_list'
+      collection do
+        get 'lists'
       end
     end
   end
