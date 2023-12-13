@@ -3,7 +3,7 @@
 
   <%= form_with url: add_recipe_path(@recipe), method: :post do |f| %>
      <p>
-
+       <%= f.collection_select :list_id, List.order(:name), :id, :name %>
      </p>
   <% end %>
 </article>
