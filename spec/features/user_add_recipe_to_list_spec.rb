@@ -17,7 +17,7 @@ feature 'Usuario adiciona receita em lista' do
     login_as user, scope: :user
     visit recipe_path(recipe1)
 
-    expect(page).to have_button('Adicionar à Lista')
+    expect(page).to have_link('Adicionar à Lista')
     expect(page).to have_content('Lista de Receitas')
   end
 end
