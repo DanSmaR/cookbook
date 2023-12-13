@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :lists, only: %i[] do
       collection do
         get 'lists'
+        post 'add_recipe'
       end
     end
   end

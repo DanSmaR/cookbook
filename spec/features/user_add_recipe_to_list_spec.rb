@@ -1,10 +1,11 @@
 require 'rails_helper'
 
-feature 'Usuario adiciona receita em lista' do
+feature 'Usuario vê Listas para escolher' do
   scenario 'com sucesso' do
     user = create(:user, email: 'user@email.com', password: '123456', role: :user)
+
     recipe_type = create(:recipe_type, name: 'Sobremesa')
-    create(:recipe, title: 'Manjar', cook_time: 60,
+    recipe2 = create(:recipe, title: 'Manjar', cook_time: 60,
            recipe_type:,
            ingredients: 'leite condensado, leite, leite de coco',
            instructions: 'Misture tudo, leve ao fogo e mexa, leve a geladeira')
@@ -14,13 +15,17 @@ feature 'Usuario adiciona receita em lista' do
            ingredients: 'hamburguer, pão de hamburguer, queijo',
            instructions: 'Frite o hamburguer, coloque no pão, coma')
 
+    user.lists.create!(:name => 'Natal', :recipe_id => recipe1.id)
+    user.lists.create!(:name => 'Fit', :recipe_id => recipe2.id)
+
     login_as user, scope: :user
     visit recipe_path(recipe1)
 
     expect(page).to have_link('Adicionar à Lista')
     click_on 'Adicionar à Lista'
     expect(page).to have_content('Adicionar Receita à Lista')
-    expect(page).to have_content('Criar Lista')
-    expect(page).to have_field('Nome da Lista')
+    expect(page).to have_field('Selecione a Lista')
+    expect(page).to have_select 'Selecione a Lista', options: %w[Natal Fit]
+    expect(page).to have_button('Adicionar')
   end
 end
