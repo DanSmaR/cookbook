@@ -5,6 +5,6 @@ class ListsController < ApplicationController
   end
 
   def add_recipe
-    @recipe = Recipe.find(params)
+    @recipe = Recipe.find(params[:recipe_id])
   end
 end
