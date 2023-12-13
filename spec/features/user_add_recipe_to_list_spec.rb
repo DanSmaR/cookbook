@@ -18,6 +18,7 @@ feature 'Usuario adiciona receita em lista' do
     visit recipe_path(recipe1)
 
     expect(page).to have_link('Adicionar à Lista')
-    expect(page).to have_content('Lista de Receitas')
+    click_on 'Adicionar à Lista'
+    expect(page).to have_content('Adicionar Receita à Lista')
   end
 end
