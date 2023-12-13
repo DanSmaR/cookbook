@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   resources :recipes, only: %i[new create edit update show] do
     resources :lists, only: %i[] do
       collection do
-        get 'lists'
-        post 'add_recipe'
+        get 'pick'
+        post 'add'
       end
     end
   end
