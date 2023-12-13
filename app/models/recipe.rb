@@ -4,6 +4,7 @@ class Recipe < ApplicationRecord
   validates :title, :cook_time, :ingredients, :instructions, presence: true
 
   def self.search(query)
-    where('title LIKE ?', "%#{query}%")
+    where('title LIKE ?',
+          "%#{sanitize_sql_like(query)}%")
   end
 end
