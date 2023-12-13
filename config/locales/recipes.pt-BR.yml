@@ -22,3 +22,5 @@ pt-BR:
     destroy:
       success: 'Receita removida com sucesso'
       error: 'Não possui autorização para remover essa receita'
+    search:
+      error: 'Termo para pesquisa está vazio'
