@@ -33,7 +33,8 @@ feature 'Usuario remove receitas da lista' do
 
     click_button 'Remover', match: :first
 
-    expect(page).to have_content 'Removido receita com sucesso'
+    expect(page).to have_content 'Receita removida com sucesso'
     expect(page).to have_current_path(list_path(user.lists.first))
+    expect(user.lists.first&.recipes&.count).to eq 2
   end
 end

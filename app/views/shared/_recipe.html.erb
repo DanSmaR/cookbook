@@ -5,7 +5,7 @@
         <div class="card-header">
           <h3> <%= link_to recipe.title, recipe_path(recipe) %></h3>
           <% if !list.nil? && current_page?(list_path(list))%>
-            <%= button_to 'Remover', method: :delete, class: 'btn btn-danger' %>
+            <%= button_to 'Remover', remove_recipe_list_path(recipe, list), method: :delete, class: 'btn btn-danger' %>
           <% end %>
         </div>
         <div class="card-body">

@@ -11,6 +11,9 @@ Rails.application.routes.draw do
         get 'pick'
         post 'add'
       end
+      member do
+        delete 'remove'
+      end
     end
   end
 

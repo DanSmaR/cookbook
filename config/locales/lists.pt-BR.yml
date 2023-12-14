@@ -17,3 +17,5 @@ pt-BR:
       error: 'Essa receita já está na lista selecionada'
     destroy:
       success: 'Lista removida com sucesso'
+    remove:
+      success: 'Receita removida com sucesso'

@@ -30,6 +30,12 @@ class ListsController < ApplicationController
     end
   end
 
+  def remove
+    @list = current_user.lists.find(params[:id])
+    @list.recipes.delete(@list.recipes.find(params[:recipe_id]))
+    redirect_to list_path(@list), notice: t('.success')
+  end
+
   def create
     @recipe = Recipe.find(params[:recipe_id])
     @list = current_user.lists.build(list_params)
