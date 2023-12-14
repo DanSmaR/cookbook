@@ -151,5 +151,11 @@ feature 'Usuario vê Listas para escolher' do
     visit root_path
 
     expect(page).to have_link 'Listas de Receitas', href: lists_path
+
+    click_link 'Listas de Receitas'
+
+    expect(page).to have_content 'Listas Receitas'
+    expect(page).to have_content 'Natal 3'
+    expect(page).to have_content 'Fit 0'
   end
 end
