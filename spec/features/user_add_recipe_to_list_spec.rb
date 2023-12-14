@@ -15,8 +15,8 @@ feature 'Usuario vê Listas para escolher' do
            ingredients: 'hamburguer, pão de hamburguer, queijo',
            instructions: 'Frite o hamburguer, coloque no pão, coma')
 
-    user.lists.create!(:name => 'Natal', :recipe_id => recipe1.id)
-    user.lists.create!(:name => 'Fit', :recipe_id => recipe2.id)
+    user.lists.create!(:name => 'Natal')
+    user.lists.create!(:name => 'Fit')
 
     login_as user, scope: :user
     visit recipe_path(recipe1)
@@ -48,8 +48,10 @@ feature 'Usuario vê Listas para escolher' do
                      ingredients: 'salsicha, pão de hotdog, ketchup, mostarda',
                      instructions: 'Asse a salsicha, coloque no pão, coma')
 
-    user.lists.create!(:name => 'Natal', :recipe_id => recipe1.id)
-    user.lists.create!(:name => 'Fit', :recipe_id => recipe2.id)
+    user.lists.create!(:name => 'Natal')
+    user.lists.create!(:name => 'Fit')
+
+    user.lists.first&.recipes << recipe1
 
     login_as user, scope: :user
     visit recipe_path(recipe3)
@@ -60,5 +62,6 @@ feature 'Usuario vê Listas para escolher' do
 
     expect(page).to have_content('Adicionada receita com sucesso')
     expect(current_path).to eq recipe_path(recipe3)
+    expect(List.first.recipes.count).to eq 2
   end
 end

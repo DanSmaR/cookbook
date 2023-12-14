@@ -13,7 +13,6 @@ feature 'Visitante vê receitas' do
                     ingredients: 'hamburguer, pão de hamburguer, queijo',
                     instructions: 'Frite o hamburguer, coloque no pão, coma')
 
-    login_as user
     visit root_path
 
     expect(page).to have_content('Manjar')
