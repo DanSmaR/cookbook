@@ -150,6 +150,6 @@ feature 'Usuario vê Listas para escolher' do
     login_as user, scope: :user
     visit root_path
 
-    expect(page).to have_link 'Listas de Receitas', href: recipe_lists_path
+    expect(page).to have_link 'Listas de Receitas', href: lists_path
   end
 end

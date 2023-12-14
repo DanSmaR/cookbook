@@ -1,4 +1,7 @@
 class ListsController < ApplicationController
+  def index
+    @lists = current_user.lists.all
+  end
   def pick
     @recipe = Recipe.find(params[:recipe_id])
     @lists = current_user.lists.all
