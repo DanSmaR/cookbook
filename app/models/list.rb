@@ -1,6 +1,7 @@
 class List < ApplicationRecord
-  has_and_belongs_to_many :recipes
   belongs_to :user
+  has_many :list_recipes
+  has_many :recipes, through: :list_recipes
 
   validates :name, presence: true
 end

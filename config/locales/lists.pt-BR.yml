@@ -14,3 +14,4 @@ pt-BR:
       error:  'Não foi possível criar lista.'
     add:
       success: 'Adicionada receita com sucesso'
+      error: 'Essa receita já está na lista selecionada'

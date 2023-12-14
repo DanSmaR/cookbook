@@ -15,9 +15,13 @@ class ListsController < ApplicationController
   def add
     @recipe = Recipe.find(params[:recipe_id])
     @list = List.find(params[:list_id])
-    @list.recipes << @recipe
-
-    redirect_to recipe_path(@recipe), notice: t('.success')
+    begin
+      @list.recipes << @recipe
+    rescue ActiveRecord::RecordInvalid
+      redirect_to recipe_path(@recipe), alert: t('.error')
+    else
+      redirect_to recipe_path(@recipe), notice: t('.success')
+    end
   end
 
   def create
