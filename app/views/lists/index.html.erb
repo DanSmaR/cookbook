@@ -1,0 +1,16 @@
+<article class="container">
+  <h2>Suas Listas de Receitas</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th><%= List.model_name.human(count: current_user.lists.count) %></th>
+        <th><%= Recipe.model_name.human(count: 2) %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render @lists %>
+    </tbody>
+  </table>
+
+</article>
