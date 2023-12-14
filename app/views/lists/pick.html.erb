@@ -19,7 +19,7 @@
 
     <%=form_with model: @list, url: recipe_lists_path(@recipe) do |f| %>
       <p>
-        <%= f.label :name, 'Nome' %>
+        <%= f.label :name %>
         <%= f.text_field :name %>
       </p>
       <p>

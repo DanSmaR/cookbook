@@ -118,7 +118,7 @@ feature 'Usuario vê Listas para escolher' do
     click_on 'Criar'
 
     expect(current_path).to eq pick_recipe_lists_path(recipe1)
-    expect(page).to have_content 'Não foi possível criar lista'
+    expect(page).to have_content 'Não foi possível criar lista. Nome não pode ficar em branco'
     expect(page).to have_select 'Selecione a Lista', options: %w[Natal Fit]
   end
 end

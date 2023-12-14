@@ -10,7 +10,7 @@ class ListsController < ApplicationController
     @list = List.find(params[:list_id])
     @list.recipes << @recipe
 
-    redirect_to recipe_path(@recipe), notice: 'Adicionada receita com sucesso'
+    redirect_to recipe_path(@recipe), notice: t('.success')
   end
 
   def create
@@ -18,10 +18,10 @@ class ListsController < ApplicationController
     @list = current_user.lists.build(list_params)
 
     if @list.save
-      flash[:notice] = "Lista criada com sucesso"
+      flash[:notice] = t('.success')
       return redirect_to pick_recipe_lists_path(@recipe)
     end
-    flash[:alert] = "Não foi possível criar lista"
+    flash[:alert] = "#{t('.error')} #{ @list.errors.full_messages_for(:name).join(', ')}"
     redirect_to pick_recipe_lists_path(@recipe)
   end
 

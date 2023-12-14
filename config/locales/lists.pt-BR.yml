@@ -1,0 +1,16 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      list:
+        one: Lista
+        other: Listas
+    attributes:
+      list:
+        name: Nome
+  lists:
+    create:
+      success:  'Lista criada com sucesso'
+      error:  'Não foi possível criar lista.'
+    add:
+      success: 'Adicionada receita com sucesso'
