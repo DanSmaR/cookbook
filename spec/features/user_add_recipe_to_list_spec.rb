@@ -98,4 +98,27 @@ feature 'Usuario vê Listas para escolher' do
     expect(page).to have_content 'Lista criada com sucesso'
     expect(page).to have_select 'Selecione a Lista', options: %w[Natal Fit Almoço]
   end
+
+  scenario 'e deve fornecer um nome para lista' do
+    user = create(:user, email: 'user@email.com', password: '123456', role: :user)
+
+    recipe_type = create(:recipe_type, name: 'Lanche')
+    recipe1 = create(:recipe, title: 'Hamburguer', cook_time: 10,
+                     recipe_type:,
+                     ingredients: 'hamburguer, pão de hamburguer, queijo',
+                     instructions: 'Frite o hamburguer, coloque no pão, coma')
+
+    user.lists.create!(:name => 'Natal')
+    user.lists.create!(:name => 'Fit')
+
+    login_as user, scope: :user
+    visit pick_recipe_lists_path(recipe1)
+
+    fill_in 'Nome', with: ''
+    click_on 'Criar'
+
+    expect(current_path).to eq pick_recipe_lists_path(recipe1)
+    expect(page).to have_content 'Não foi possível criar lista'
+    expect(page).to have_select 'Selecione a Lista', options: %w[Natal Fit]
+  end
 end
