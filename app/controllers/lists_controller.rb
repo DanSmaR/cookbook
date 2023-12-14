@@ -6,6 +6,12 @@ class ListsController < ApplicationController
   def show
     @list = current_user.lists.find(params[:id])
   end
+
+  def destroy
+    @list = current_user.lists.find(params[:id])
+    @list.destroy
+    redirect_to lists_path, notice: t('.success')
+  end
   def pick
     @recipe = Recipe.find(params[:recipe_id])
     @lists = current_user.lists.all

@@ -15,3 +15,5 @@ pt-BR:
     add:
       success: 'Adicionada receita com sucesso'
       error: 'Essa receita já está na lista selecionada'
+    destroy:
+      success: 'Lista removida com sucesso'

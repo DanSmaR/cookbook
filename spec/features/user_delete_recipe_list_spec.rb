@@ -20,7 +20,7 @@ feature 'Usuário remove lista de receitas' do
 
     expect(page).to have_button 'Remover'
 
-    click_button 'Remover'
+    click_button 'Remover', match: :first
 
     expect(page).to have_content 'Lista removida com sucesso'
     expect(page).to have_current_path(lists_path)

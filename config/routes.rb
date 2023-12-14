@@ -14,5 +14,5 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :lists, only: %i[index show]
+  resources :lists, only: %i[index show destroy]
 end

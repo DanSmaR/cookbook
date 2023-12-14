@@ -1,4 +1,5 @@
 <tr>
   <td><%= link_to list.name, list_path(list) %></td>
   <td><%= list.recipes.count %></td>
+  <td><%= button_to 'Remover', list_path(list), method: :delete, class: 'btn btn-danger' %></td>
 </tr>
