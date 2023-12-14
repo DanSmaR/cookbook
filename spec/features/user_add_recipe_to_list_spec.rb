@@ -158,4 +158,48 @@ feature 'Usuario vê Listas para escolher' do
     expect(page).to have_content 'Natal 3'
     expect(page).to have_content 'Fit 0'
   end
+
+  scenario 'e acessa uma lista da relação para ver as receitas' do
+    user = create(:user, email: 'user@email.com', password: '123456', role: :user)
+
+    recipe_type = create(:recipe_type)
+    recipe2 = create(:recipe, title: 'Manjar', cook_time: 60,
+                     recipe_type:,
+                     ingredients: 'leite condensado, leite, leite de coco',
+                     instructions: 'Misture tudo, leve ao fogo e mexa, leve a geladeira')
+    recipe_type = create(:recipe_type, name: 'Lanche')
+    recipe1 = create(:recipe, title: 'Hamburguer', cook_time: 10,
+                     recipe_type:,
+                     ingredients: 'hamburguer, pão de hamburguer, queijo',
+                     instructions: 'Frite o hamburguer, coloque no pão, coma')
+    recipe3 = create(:recipe, title: 'HotDog', cook_time: 10,
+                     recipe_type: ,
+                     ingredients: 'salsicha, pão de hotdog, ketchup, mostarda',
+                     instructions: 'Asse a salsicha, coloque no pão, coma')
+
+    user.lists.create!(:name => 'Natal')
+    user.lists.create!(:name => 'Fit')
+
+    user.lists.first&.recipes << recipe1
+    user.lists.first&.recipes << recipe2
+    user.lists.first&.recipes << recipe3
+
+    login_as user, scope: :user
+    visit lists_path
+
+    expect(page).to have_link 'Natal'
+
+    click_link 'Natal'
+
+    expect(page).to have_content 'Lista de Receitas Natal'
+    expect(page).to have_content('Manjar')
+    expect(page).to have_content('Sobremesa')
+    expect(page).to have_content('60 minutos')
+    expect(page).to have_content('Hamburguer')
+    expect(page).to have_content('Lanche')
+    expect(page).to have_content('10 minutos')
+    expect(page).to have_content('HotDog')
+    expect(page).to have_content('Lanche')
+    expect(page).to have_content('10 minutos')
+  end
 end
