@@ -65,6 +65,32 @@ feature 'Usuario vê Listas para escolher' do
     expect(List.first.recipes.count).to eq 2
   end
 
+  scenario 'e não pode ter receitas duplicadas na mesma lista' do
+    user = create(:user, email: 'user@email.com', password: '123456', role: :user)
+
+    recipe_type = create(:recipe_type, name: 'Lanche')
+    recipe1 = create(:recipe, title: 'Hamburguer', cook_time: 10,
+                     recipe_type:,
+                     ingredients: 'hamburguer, pão de hamburguer, queijo',
+                     instructions: 'Frite o hamburguer, coloque no pão, coma')
+
+    user.lists.create!(:name => 'Natal')
+    user.lists.create!(:name => 'Fit')
+
+    user.lists.first&.recipes << recipe1
+
+    login_as user, scope: :user
+    visit recipe_path(recipe1)
+
+    click_on 'Adicionar à Lista'
+    select 'Natal', from: 'Selecione a Lista'
+    click_on 'Adicionar'
+
+    expect(page).to have_content('Essa receita já está na lista selecionada')
+    expect(current_path).to eq recipe_path(recipe1)
+    expect(List.first.recipes.count).to eq 1
+  end
+
   scenario 'e cria lista nova com sucesso' do
     user = create(:user, email: 'user@email.com', password: '123456', role: :user)
 
