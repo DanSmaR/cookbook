@@ -64,4 +64,31 @@ feature 'Usuario vê Listas para escolher' do
     expect(current_path).to eq recipe_path(recipe3)
     expect(List.first.recipes.count).to eq 2
   end
+
+  scenario 'e cria lista nova com sucesso' do
+    user = create(:user, email: 'user@email.com', password: '123456', role: :user)
+
+    recipe_type = create(:recipe_type, name: 'Lanche')
+    recipe1 = create(:recipe, title: 'Hamburguer', cook_time: 10,
+                     recipe_type:,
+                     ingredients: 'hamburguer, pão de hamburguer, queijo',
+                     instructions: 'Frite o hamburguer, coloque no pão, coma')
+    recipe3 = create(:recipe, title: 'HotDog', cook_time: 10,
+                     user: user,
+                     recipe_type: ,
+                     ingredients: 'salsicha, pão de hotdog, ketchup, mostarda',
+                     instructions: 'Asse a salsicha, coloque no pão, coma')
+
+    user.lists.create!(:name => 'Natal')
+    user.lists.create!(:name => 'Fit')
+
+    user.lists.first&.recipes << recipe1
+
+    login_as user, scope: :user
+    visit pick_recipe_lists_path(recipe3)
+
+    expect(page).to have_content('Nova Lista')
+    expect(page).to have_field('Nome')
+    expect(page).to have_button('Criar')
+  end
 end

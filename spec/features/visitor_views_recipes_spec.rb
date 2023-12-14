@@ -40,7 +40,7 @@ feature 'Visitante vê receitas' do
     expect(page).to have_content('Frite o hamburguer, coloque no pão, coma')
   end
 
-  scenario 'visuealiza receitas por tipo de receita' do
+  scenario 'visualiza receitas por tipo de receita' do
     recipe_type = create(:recipe_type, name: 'Sobremesa')
     other_recipe_type = create(:recipe_type, name: 'Lanche')
     create(:recipe, title: 'Manjar', cook_time: 60,
