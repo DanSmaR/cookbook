@@ -11,6 +11,10 @@ class RecipesController < ApplicationController
 
   def edit
     @recipe = Recipe.find(params[:id])
+    unless @recipe.user == current_user
+      flash[:alert] = t('.error')
+      redirect_to recipe_path(@recipe)
+    end
   end
 
   def create
@@ -18,7 +22,7 @@ class RecipesController < ApplicationController
 
     if @recipe.save
       flash[:notice] = t('.success')
-      return redirect_to(@recipe) 
+      return redirect_to(@recipe)
     end
     flash.now[:alert] = t('.error')
     render :new
@@ -30,6 +34,26 @@ class RecipesController < ApplicationController
     return redirect_to @recipe if @recipe.update(recipe_params)
 
     render :edit
+  end
+
+  def destroy
+    begin
+      recipe = current_user.recipes.find(params[:id])
+    rescue
+      @recipe = Recipe.find(params[:id])
+      flash.now[:alert] = t('.error')
+      return render :show, status: :unprocessable_entity
+    else
+      recipe.destroy
+      flash[:notice] = t('.success')
+      redirect_to root_path, status: :see_other
+    end
+  end
+
+  def search
+    @name = params[:name]
+    return redirect_back(fallback_location: root_path, alert: t('.error')) if @name.blank?
+    @recipes = Recipe.search(@name)
   end
 
   private

@@ -1,10 +1,15 @@
 <div class="card border-0 shadow-lg">
-  <div class="card-header">
+  <div class="card-header d-flex justify-content-start align-items-center" style="gap: 1em">
     <h3 class="mt-2">
       <%= @recipe.title %>
       <%= link_to 'Editar', edit_recipe_path(@recipe), class: 'btn btn-primary' %>
       <%= link_to 'Adicionar à Lista', pick_recipe_lists_path(@recipe), class: 'btn btn-secondary' %>
     </h3>
+    <% if user_signed_in? && @recipe.user == current_user %>
+      <%= button_to 'Remover', recipe_path(@recipe),
+                    method: :delete, class: 'btn btn-danger'
+      %>
+    <% end %>
   </div>
   <div class="card-body">
     <p class="strong"> Criado por: <%= @recipe.user.email %> </p>

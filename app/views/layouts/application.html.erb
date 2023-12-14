@@ -11,8 +11,11 @@
   </head>
 
   <body>
+    <header class="d-flex justify-content-around bg-light">
+      <%= render partial: 'shared/nav' %>
+      <%= render partial: 'shared/search' %>
+    </header>
     <main class="container">
-    <%= render partial: 'shared/nav' %>
     <%= render partial: 'shared/flashes' %>
     <%= yield %>
     </main>

@@ -1,0 +1,10 @@
+<article class="container mt-3">
+  <h2>Resultado da Busca por: <em class="strong"><%= @name %></em></h2>
+
+  <p>
+    <%= @recipes.count %> <%= Recipe.model_name.human(count: @recipes.count).downcase %>
+    <%= t(:found, count: @recipes.count) %>
+  </p>
+
+  <%= render partial: 'shared/recipe', locals: { recipes: @recipes } %>
+</article>
