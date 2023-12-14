@@ -1,13 +1,31 @@
 <article class="container">
-  <h2>Adicionar Receita à Lista</h2>
+  <section>
+    <h2>Adicionar Receita à Lista</h2>
 
-  <%= form_with url: add_recipe_lists_path(@recipe), method: :post do |f| %>
-     <p>
-       <%= f.label :list_id, 'Selecione a Lista' %>
-       <%= f.collection_select :list_id, List.order(:name), :id, :name %>
-     </p>
-    <p>
-      <%= f.submit 'Adicionar' %>
-    </p>
-  <% end %>
+    <%= form_with url: add_recipe_lists_path(@recipe), method: :post do |f| %>
+      <p>
+        <%= f.label :list_id, 'Selecione a Lista' %>
+        <%= f.collection_select :list_id, List.order(:name), :id, :name %>
+      </p>
+      <p>
+        <%= f.submit 'Adicionar' %>
+      </p>
+    <% end %>
+
+  </section>
+
+  <section>
+    <h2>Nova Lista</h2>
+
+    <%=form_with model: @list, url: recipe_lists_path(@recipe) do |f| %>
+      <p>
+        <%= f.label :name, 'Nome' %>
+        <%= f.text_field :name %>
+      </p>
+      <p>
+        <%= f.submit 'Criar' %>
+      </p>
+    <% end %>
+  </section>
+
 </article>

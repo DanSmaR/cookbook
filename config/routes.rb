@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     collection do
       get 'search'
     end
-    resources :lists, only: %i[] do
+    resources :lists, only: %i[create] do
       collection do
         get 'pick'
         post 'add'

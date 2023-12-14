@@ -90,5 +90,12 @@ feature 'Usuario vê Listas para escolher' do
     expect(page).to have_content('Nova Lista')
     expect(page).to have_field('Nome')
     expect(page).to have_button('Criar')
+
+    fill_in 'Nome', with: 'Almoço'
+    click_on 'Criar'
+
+    expect(current_path).to eq pick_recipe_lists_path(recipe3)
+    expect(page).to have_content 'Lista criada com sucesso'
+    expect(page).to have_select 'Selecione a Lista', options: %w[Natal Fit Almoço]
   end
 end
