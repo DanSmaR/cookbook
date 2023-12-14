@@ -6,5 +6,5 @@
     <%= t(:found, count: @recipes.count) %>
   </p>
 
-  <%= render partial: 'shared/recipe', locals: { recipes: @recipes } %>
+  <%= render partial: 'shared/recipe', locals: { recipes: @recipes, list: nil } %>
 </article>

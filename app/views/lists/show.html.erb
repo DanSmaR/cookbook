@@ -1,5 +1,5 @@
 <article class="container">
   <h2><%= List.model_name.human %> de <%= Recipe.model_name.human(count: 2) %> <%= @list.name %></h2>
 
-  <%= render 'shared/recipe', recipes: @list.recipes %>
+  <%= render 'shared/recipe', recipes: @list.recipes, list: @list %>
 </article>
