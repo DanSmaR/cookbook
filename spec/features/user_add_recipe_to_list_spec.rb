@@ -187,7 +187,7 @@ feature 'Usuario vê Listas para escolher' do
     login_as user, scope: :user
     visit lists_path
 
-    expect(page).to have_link 'Natal'
+    expect(page).to have_link 'Natal', href: list_path(user.lists.first)
 
     click_link 'Natal'
 
