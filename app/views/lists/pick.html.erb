@@ -5,7 +5,7 @@
     <%= form_with url: add_recipe_lists_path(@recipe), method: :post do |f| %>
       <p>
         <%= f.label :list_id, 'Selecione a Lista' %>
-        <%= f.collection_select :list_id, List.order(:name), :id, :name %>
+        <%= f.collection_select :list_id, current_user.lists.order(:name), :id, :name %>
       </p>
       <p>
         <%= f.submit 'Adicionar' %>

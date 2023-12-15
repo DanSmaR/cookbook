@@ -306,7 +306,7 @@ feature 'Usuario vê Listas para escolher' do
 
     user.lists.create!(:name => 'Natal')
     user.lists.create!(:name => 'Fit')
-    another_user.lists.create!(:name => 'Ano novo')
+    another_user.lists.create!(:name => 'Ano Novo')
 
     user.lists.first&.recipes << recipe1
 
