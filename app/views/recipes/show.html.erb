@@ -3,8 +3,10 @@
     <h3 class="mt-2">
       <%= @recipe.title %>
       <%= link_to 'Editar', edit_recipe_path(@recipe), class: 'btn btn-primary' %>
-      <%= link_to 'Adicionar à Lista', pick_recipe_lists_path(@recipe), class: 'btn btn-secondary' %>
     </h3>
+    <% if user_signed_in? %>
+      <%= link_to 'Adicionar à Lista', pick_recipe_lists_path(@recipe), class: 'btn btn-secondary' %>
+    <% end %>
     <% if user_signed_in? && @recipe.user == current_user %>
       <%= button_to 'Remover', recipe_path(@recipe),
                     method: :delete, class: 'btn btn-danger'
