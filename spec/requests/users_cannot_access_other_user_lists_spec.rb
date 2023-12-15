@@ -19,6 +19,6 @@ feature 'Users cannot access other user lists', type: :request do
 
     get list_path(list)
 
-    expect(response).to have_http_status 401
+    expect(response).to have_http_status 404
   end
 end

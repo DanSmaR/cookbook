@@ -1,4 +1,5 @@
 class ListsController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   before_action :authenticate_user!
   before_action :admin_roles_forbid
   def index
@@ -61,5 +62,10 @@ class ListsController < ApplicationController
       flash[:alert] = "Você não possui autorização para acessar esse recurso"
       redirect_to root_path, status: :unauthorized
     end
+  end
+
+  def record_not_found
+    flash[:alert] = "Registro não encontrado"
+    redirect_to root_path, status: :not_found
   end
 end
