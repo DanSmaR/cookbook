@@ -289,4 +289,31 @@ feature 'Usuario vê Listas para escolher' do
     expect(page).to have_content('Lanche')
     expect(page).to have_content('10 minutos')
   end
+
+  scenario 'e usuário não vê listas de outros usuários ao adicionar receita' do
+    user = create(:user, email: 'user@email.com', password: '123456', role: :user)
+    another_user = create(:user, email: 'another@email.com', password: '123456', role: :user)
+    recipe_type = create(:recipe_type, name: 'Lanche')
+    recipe1 = create(:recipe, title: 'Hamburguer', cook_time: 10,
+                     recipe_type:,
+                     ingredients: 'hamburguer, pão de hamburguer, queijo',
+                     instructions: 'Frite o hamburguer, coloque no pão, coma')
+    recipe3 = create(:recipe, title: 'HotDog', cook_time: 10,
+                     user: user,
+                     recipe_type: ,
+                     ingredients: 'salsicha, pão de hotdog, ketchup, mostarda',
+                     instructions: 'Asse a salsicha, coloque no pão, coma')
+
+    user.lists.create!(:name => 'Natal')
+    user.lists.create!(:name => 'Fit')
+    another_user.lists.create!(:name => 'Ano novo')
+
+    user.lists.first&.recipes << recipe1
+
+    login_as another_user
+    visit pick_recipe_lists_path(recipe3)
+
+    expect(page).to have_select 'Selecione a Lista',
+                                options: ['Ano Novo']
+  end
 end
