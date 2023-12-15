@@ -4,7 +4,7 @@
       <%= @recipe.title %>
       <%= link_to 'Editar', edit_recipe_path(@recipe), class: 'btn btn-primary' %>
     </h3>
-    <% if user_signed_in? %>
+    <% if user_signed_in? && current_user.user? %>
       <%= link_to 'Adicionar à Lista', pick_recipe_lists_path(@recipe), class: 'btn btn-secondary' %>
     <% end %>
     <% if user_signed_in? && @recipe.user == current_user %>
