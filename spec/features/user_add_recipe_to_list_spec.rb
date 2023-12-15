@@ -29,6 +29,25 @@ feature 'Usuario vê Listas para escolher' do
     expect(page).to have_button('Adicionar')
   end
 
+  scenario 'sem estar autenticado, não consegue acessar listas' do
+    user = create(:user, email: 'user@email.com', password: '123456', role: :user)
+
+    recipe_type = create(:recipe_type, name: 'Lanche')
+    recipe1 = create(:recipe, title: 'Hamburguer', cook_time: 10,
+                     recipe_type:,
+                     ingredients: 'hamburguer, pão de hamburguer, queijo',
+                     instructions: 'Frite o hamburguer, coloque no pão, coma')
+
+    user.lists.create!(:name => 'Natal')
+    user.lists.create!(:name => 'Fit')
+
+    user.lists.first&.recipes << recipe1
+
+    visit root_path
+
+    expect(page).to_not have_link 'Listas de Receitas'
+  end
+
   scenario 'e adiciona com sucesso' do
     user = create(:user, email: 'user@email.com', password: '123456', role: :user)
 
@@ -63,6 +82,23 @@ feature 'Usuario vê Listas para escolher' do
     expect(page).to have_content('Adicionada receita com sucesso')
     expect(current_path).to eq recipe_path(recipe3)
     expect(List.first.recipes.count).to eq 2
+  end
+
+  scenario 'sem estar autenticado, não consegue adicionar receitas as listas' do
+    user = create(:user, email: 'user@email.com', password: '123456', role: :user)
+
+    recipe_type = create(:recipe_type, name: 'Lanche')
+    recipe1 = create(:recipe, title: 'Hamburguer', cook_time: 10,
+                     recipe_type:,
+                     ingredients: 'hamburguer, pão de hamburguer, queijo',
+                     instructions: 'Frite o hamburguer, coloque no pão, coma')
+
+    user.lists.create!(:name => 'Natal')
+    user.lists.create!(:name => 'Fit')
+
+    visit recipe_path(recipe1)
+
+    expect(page).to_not have_link 'Adicionar à Lista'
   end
 
   scenario 'e não pode ter receitas duplicadas na mesma lista' do
