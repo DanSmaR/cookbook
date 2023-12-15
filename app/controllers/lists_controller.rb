@@ -1,5 +1,6 @@
 class ListsController < ApplicationController
   before_action :authenticate_user!
+  before_action :admin_roles_forbid
   def index
     @lists = current_user.lists.all
   end
@@ -53,5 +54,12 @@ class ListsController < ApplicationController
 
   def list_params
     params.require(:list).permit(:name)
+  end
+
+  def admin_roles_forbid
+    unless current_user.user?
+      flash[:alert] = "Você não possui autorização para acessar esse recurso"
+      redirect_to root_path, status: :unauthorized
+    end
   end
 end
