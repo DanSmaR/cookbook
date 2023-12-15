@@ -101,6 +101,31 @@ feature 'Usuario vê Listas para escolher' do
     expect(page).to_not have_link 'Adicionar à Lista'
   end
 
+  scenario 'mas admin não vê links relacionados as listas' do
+    user = create(:user, email: 'user@email.com', password: '123456', role: :user)
+    admin = create(:user, email: 'admin@email.com', password: '123456', role: :admin)
+
+    recipe_type = create(:recipe_type, name: 'Lanche')
+    recipe1 = create(:recipe, title: 'Hamburguer', cook_time: 10,
+                     recipe_type:,
+                     ingredients: 'hamburguer, pão de hamburguer, queijo',
+                     instructions: 'Frite o hamburguer, coloque no pão, coma')
+
+    user.lists.create!(:name => 'Natal')
+    user.lists.create!(:name => 'Fit')
+
+    user.lists.first&.recipes << recipe1
+
+    login_as admin
+    visit root_path
+
+    expect(page).to_not have_link 'Listas de Receitas'
+
+    click_link 'Hamburguer'
+
+    expect(page).to_not have_link 'Adicionar à Lista'
+  end
+
   scenario 'e não pode ter receitas duplicadas na mesma lista' do
     user = create(:user, email: 'user@email.com', password: '123456', role: :user)
 
