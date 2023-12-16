@@ -1,15 +1,16 @@
 <article class="container">
   <h2>Suas Listas de Receitas</h2>
 
-  <table>
+  <table class="table table-hover">
+    <caption class="visually-hidden">Recipe lists</caption>
     <thead>
       <tr>
-        <th><%= List.model_name.human(count: current_user.lists.count) %></th>
-        <th><%= Recipe.model_name.human(count: 2) %></th>
-        <th></th>
+        <th scope="col"><%= List.model_name.human(count: current_user.lists.count) %></th>
+        <th scope="col"><%= Recipe.model_name.human(count: 2) %></th>
+        <th scope="col"></th>
       </tr>
     </thead>
-    <tbody>
+    <tbody class="table-group-divider">
       <%= render @lists %>
     </tbody>
   </table>
