@@ -119,10 +119,10 @@ feature 'GET /api/v1/recipes', type: :request do
 
     recipe_type = create(:recipe_type, name: 'Lanche')
     user2 = create(:user, email: 'user2@email.com', password: '123456', role: :user)
-    recipe2 = create(:recipe, title: 'Hamburguer', cook_time: 10, user: user2, recipe_type:,
+    create(:recipe, title: 'Hamburguer', cook_time: 10, user: user2, recipe_type:,
                      ingredients: 'hamburguer, pão de hamburguer, queijo',
                      instructions: 'Frite o hamburguer, coloque no pão, coma')
-    recipe3 = create(:recipe, title: 'HotDog', cook_time: 10, user: user2, recipe_type: ,
+    create(:recipe, title: 'HotDog', cook_time: 10, user: user2, recipe_type: ,
                      ingredients: 'salsicha, pão de hotdog, ketchup, mostarda',
                      instructions: 'Asse a salsicha, coloque no pão, coma')
 

@@ -53,7 +53,7 @@ class RecipesController < ApplicationController
   def search
     @name = params[:name]
     return redirect_back(fallback_location: root_path, alert: t('.error')) if @name.blank?
-    @recipes = Recipe.search(@name)
+    @recipes = Recipe.search_by_title(@name)
   end
 
   private

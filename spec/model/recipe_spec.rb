@@ -10,7 +10,7 @@ RSpec.describe Recipe, type: :model do
       create(:recipe, title: "Hamburguer", user: user, recipe_type: recipe_type2)
       create(:recipe, title: "Manjar", user: user, recipe_type: recipe_type1)
 
-      result = Recipe.search('m')
+      result = Recipe.search_by_title('m')
 
       expect(result.all.count).to eq 2
       expect(result.first.title).to eq 'Hamburguer'

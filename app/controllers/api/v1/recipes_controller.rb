@@ -3,8 +3,11 @@ class Api::V1::RecipesController < ActionController::API
     recipes = Recipe.all
 
     unless params[:title].nil?
-      recipes = recipes.where('title LIKE ?',
-                              "%#{Recipe.sanitize_sql_like(params[:title])}%")
+      recipes = recipes.search_by_title(params[:title])
+    end
+
+    unless params[:recipe_type].nil?
+      recipes = recipes.search_by_recipe_type(params[:recipe_type])
     end
 
     render json: recipes.as_json(only: [:id, :title, :cook_time],
