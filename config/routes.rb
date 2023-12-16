@@ -18,4 +18,10 @@ Rails.application.routes.draw do
   end
 
   resources :lists, only: %i[index show destroy]
+
+  namespace :api do
+    namespace :v1 do
+      resources :recipes, only: %i[index]
+    end
+  end
 end
